@@ -17,7 +17,7 @@
 
 ## 코딩 컨벤션
 - Front-End, Back-End 모두 JS 사용으로 컨벤션 통일
-- [Airbnb JavaScript Convention])(https://github.com/airbnb/javascript) 사용
+- [Airbnb JavaScript Convention](https://github.com/airbnb/javascript) 사용
 
 ### 사용 Tool
 - ESLint : JavaScript 코드에서 발견 된 문제을 식별하는 정적 코드 분석 도구
