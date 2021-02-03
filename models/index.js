@@ -4,7 +4,7 @@ const Category = require('./Category');
 const Promotion = require('./Promotion');
 
 const env = process.env.NODE_ENV || 'development';
-const config = require('../dnd-mentee-4th-4-submodule/config.json')[env];
+const config = require('../config/config.json')[env];
 const db = {};
 
 const sequelize = new Sequelize(config);
