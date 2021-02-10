@@ -1,15 +1,13 @@
 const express = require('express');
+const app = express();
+
+const { sequelize } = require('./models');
+const promotionRouter = require('./routes/promotionRouter.js');
 
 const app = express();
-const { sequelize } = require('./models');
 
-app.set('port', process.env.PORT || 3000);
-app.get('/', (req, res) => {
-  res.send('Hello, Express');
+app.use('/api', promotionRouter);
+
+sequelize.sync().then(() => {
+  app.listen(8080);
 });
-
-app.listen(app.get('port'), () => {
-  console.log(app.get('port'), '번 포트에서 대기 중');
-});
-
-sequelize.sync();
