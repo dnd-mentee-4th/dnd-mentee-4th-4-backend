@@ -1,8 +1,8 @@
 const Sequelize = require('sequelize');
 
 module.exports = class Category extends Sequelize.Model {
-  static init = (sequelize) =>
-    super.init(
+  static init(sequelize) {
+    return super.init(
       {
         id: {
           field: 'category_id',
@@ -28,6 +28,7 @@ module.exports = class Category extends Sequelize.Model {
         underscored: true,
       },
     );
+  }
 
   static associate(db) {
     db.Category.hasMany(db.Brand);
