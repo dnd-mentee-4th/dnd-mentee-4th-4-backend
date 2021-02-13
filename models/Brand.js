@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 module.exports = class Brand extends Sequelize.Model {
-  static init = (sequelize) =>
+  static init(sequelize) {
     super.init(
       {
         id: {
@@ -36,6 +36,7 @@ module.exports = class Brand extends Sequelize.Model {
         underscored: true,
       },
     );
+  }
 
   static associate(db) {
     db.Brand.hasMany(db.Promotion);
