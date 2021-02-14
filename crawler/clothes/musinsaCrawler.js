@@ -1,5 +1,9 @@
 const puppeteer = require('puppeteer');
-const { bulkCreate } = require('../service/promotionService.js');
+<<<<<<< HEAD:crawler/clothes/musinsaCrawler.js
+const { bulkCreate } = require('../../service/promotionService.js');
+=======
+const { createAll } = require('../../service/promotionService.js');
+>>>>>>> d58c608d6e01efc6477db30c4f1870793a8f9659:crawler/musinsaCrawler.js
 
 const BASE_URL = 'https://store.musinsa.com';
 
@@ -81,10 +85,10 @@ const musinsaCrawler = async () => {
   return promotions;
 };
 
-const musinsaPromotionSaveAll = async () => {
+const musinsaSaveAll = async () => {
   const promotions = await musinsaCrawler();
 
-  await bulkCreate(promotions, 1);
+  await createAll(promotions, 1);
 };
 
-module.exports = { promotionSaveAll: musinsaPromotionSaveAll };
+module.exports = { musinsaSaveAll };

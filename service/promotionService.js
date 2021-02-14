@@ -1,17 +1,16 @@
-const promotion = require('../models/Promotion.js');
-const { Promotion } = require('../models');
+const Promotion = require('../models/Promotion.js');
 
 const findAll = () => {
-  return promotion.findAll();
+  return Promotion.findAll();
 };
 
 const findByBrand = (brandId) => {
-  return promotion.findAll({
+  return Promotion.findAll({
     where: { brand_id: brandId },
   });
 };
 
-const bulkCreate = async (promotions, brandId) => {
+const createAll = async (promotions, brandId) => {
   const savedPromotions = promotions.forEach((promotion) => {
     const promotionJson = JSON.parse(promotion);
 
@@ -36,5 +35,5 @@ const bulkCreate = async (promotions, brandId) => {
 module.exports = {
   findAll,
   findByBrand,
-  bulkCreate
+  createAll,
 };
