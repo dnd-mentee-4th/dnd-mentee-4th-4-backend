@@ -1,9 +1,5 @@
 const puppeteer = require('puppeteer');
-<<<<<<< HEAD:crawler/clothes/musinsaCrawler.js
-const { bulkCreate } = require('../../service/promotionService.js');
-=======
 const { createAll } = require('../../service/promotionService.js');
->>>>>>> d58c608d6e01efc6477db30c4f1870793a8f9659:crawler/musinsaCrawler.js
 
 const BASE_URL = 'https://store.musinsa.com';
 
