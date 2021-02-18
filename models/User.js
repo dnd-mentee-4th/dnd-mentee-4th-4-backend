@@ -7,6 +7,7 @@ module.exports = class User extends Sequelize.Model {
         id: {
           field: 'user_id',
           type: Sequelize.INTEGER,
+          autoIncrement: true,
           primaryKey: true,
           allowNull: false,
         },
@@ -22,6 +23,10 @@ module.exports = class User extends Sequelize.Model {
         provider: {
           type: Sequelize.STRING,
           allowNull: false,
+        },
+        profile_id: {
+          type: Sequelize.STRING,
+          allowNull: true,
         },
       },
       {
