@@ -8,14 +8,18 @@ module.exports = class User extends Sequelize.Model {
           field: 'user_id',
           type: Sequelize.INTEGER,
           primaryKey: true,
-          autoIncrement: true,
           allowNull: false,
         },
         email: {
           type: Sequelize.STRING,
           allowNull: false,
+          unique: true,
         },
         nickname: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
+        provider: {
           type: Sequelize.STRING,
           allowNull: false,
         },
