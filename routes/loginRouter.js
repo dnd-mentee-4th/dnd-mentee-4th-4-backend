@@ -4,7 +4,7 @@ const { isExistUser, createUser } = require('../service/loginService');
 const router = express.Router();
 
 router.post('/', async (req, res) => {
-  const result = await isExistUser(req.body.email);
+  const result = await isExistUser(req.body.profile_id);
   if (result === -1) {
     res.status(500).end();
   } else if (result === 0) {
