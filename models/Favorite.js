@@ -27,7 +27,7 @@ module.exports = class Favorite extends Sequelize.Model {
   }
 
   static associate(db) {
-    db.User.belongsToMany(db.Category, { through: 'Favorite' });
-    db.Category.belongsToMany(db.User, { through: 'Favorite' });
+    db.User.belongsToMany(db.Brand, { through: 'Favorite' });
+    db.Brand.belongsToMany(db.User, { through: 'Favorite' });
   }
 };
