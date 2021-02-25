@@ -1,6 +1,5 @@
 const express = require('express');
 const morgan = require('morgan');
-const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
@@ -9,17 +8,14 @@ const cors = require('cors');
 
 dotenv.config({ path: path.join(__dirname, 'config/.env') });
 
-const authRouter = require('./routes/auth.js');
-const passportConfig = require('./passport');
-
 const { sequelize } = require('./models');
+const loginRouter = require('./routes/loginRouter.js');
 const promotionRouter = require('./routes/promotionRouter.js');
 const categoryRouter = require('./routes/categoryRouter.js');
 const brandRouter = require('./routes/brandRouter.js');
 const indexRouter = require('./routes/indexRouter.js');
 
 const app = express();
-passportConfig();
 
 app.use(cors());
 
@@ -39,11 +35,8 @@ app.use(
   }),
 );
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use('/auth', authRouter);
 app.use('/api', [promotionRouter, categoryRouter, brandRouter]);
+app.use('/login', loginRouter);
 app.use('/', indexRouter);
 
 sequelize.sync().then(() => {
