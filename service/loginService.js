@@ -3,7 +3,7 @@ const { User } = require('../models');
 const isExistUser = async (currUserProfileId) => {
   try {
     const currUser = await User.findOne({
-      where: { profile_id: currUserProfileId },
+      where: { profileId: currUserProfileId },
     });
     if (currUser) {
       // 일치하는 email을 가진 User를 찾은 경우
@@ -24,7 +24,7 @@ const createUser = async (user) => {
       email: null,
       nickname: user.nickname,
       provider: 'kakao',
-      profile_id: user.profile_id,
+      profileId: user.profile_id,
     });
   } catch (err) {
     // DB INSERT 과정에서 문제가 발생했을 경우

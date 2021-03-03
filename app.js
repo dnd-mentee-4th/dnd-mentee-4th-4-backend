@@ -14,6 +14,7 @@ const promotionRouter = require('./routes/promotionRouter.js');
 const categoryRouter = require('./routes/categoryRouter.js');
 const brandRouter = require('./routes/brandRouter.js');
 const indexRouter = require('./routes/indexRouter.js');
+const favoriteRouter = require('./routes/favoriteRouter.js');
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use(
 
 app.use('/api', [promotionRouter, categoryRouter, brandRouter]);
 app.use('/login', loginRouter);
+app.use('/users', favoriteRouter);
 app.use('/', indexRouter);
 
 sequelize.sync().then(() => {
