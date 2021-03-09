@@ -1,5 +1,5 @@
 const express = require('express');
-const favoriteService = require('../service/favoriteService');
+const favoriteService = require('../service/favoriteService.js');
 
 const router = express.Router();
 
@@ -26,7 +26,7 @@ router.delete('/:profileId/favorites', async (req, res) => {
 
   await favoriteService.deleteFavorite(profileId, brandId);
 
-  res.status(204);
+  res.status(204).send();
 });
 
 module.exports = router;
