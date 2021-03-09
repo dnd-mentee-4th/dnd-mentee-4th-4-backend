@@ -1,5 +1,6 @@
-const { Favorite } = require('../models');
+const { sequelize, Favorite, Brand, User } = require('../models');
 
+// eslint-disable-next-line consistent-return
 const findFavoriteBrandByUser = async (profileId) => {
   try {
     return await Favorite.findAll({
@@ -14,13 +15,17 @@ const findFavoriteBrandByUser = async (profileId) => {
 
 const createFavorite = async (profileId, brandId) => {
   try {
-    await Favorite.create({
-      user_profile_id: profileId,
-      brand_id: brandId,
-    });
-    // await db.sequelize.query(
-    //   `INSERT INTO zzomsa.Favorite(create_at, update_at, user_profile_id, brand_id) VALUES (now(), now(), '${profileId}', ${brandId});`,
-    // );
+    // const brand = await Brand.findByPk(brandId);
+    // const user = await User.findByPk(profileId);
+    // console.log(brand.id);
+    // console.log(user.profileId);
+    // await Favorite.create({
+    //   brandId: brand.id,
+    //   userProfileId: user.profileId,
+    // });
+    await sequelize.query(
+      `INSERT INTO zzomsa.Favorite(create_at, update_at, user_profile_id, brand_id) VALUES (now(), now(), '${profileId}', ${brandId});`,
+    );
   } catch (err) {
     console.error(err);
   }
