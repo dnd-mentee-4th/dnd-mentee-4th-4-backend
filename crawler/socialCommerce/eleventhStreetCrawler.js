@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const { createAll } = require('../../service/promotionService.js');
+const { findByName } = require('../../service/brandService.js');
 
 const categories = [
   { index: '01', type: '브랜드패션 기획전' },
@@ -113,9 +114,10 @@ const eleventhStreetCrawler = (() => {
 })();
 
 const eleventhStreetCrawlerSaveAll = async () => {
+  const brand = await findByName('11번가');
   const promotions = await eleventhStreetCrawler.run();
 
-  await createAll(promotions, 5);
+  await createAll(promotions, brand);
 };
 
 module.exports = { eleventhStreetCrawlerSaveAll };

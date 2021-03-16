@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const { createAll } = require('../../service/promotionService.js');
+const { findByName } = require('../../service/brandService.js');
 
 const URL = 'https://www.gmarket.co.kr/';
 
@@ -19,9 +20,7 @@ const gmarketCrawler = (() => {
     for (const promotion of promotionList) {
       scrappedData.push(
         JSON.stringify({
-          url: await promotion.$eval('a', (elem) =>
-            elem.getAttribute('href'),
-          ),
+          url: await promotion.$eval('a', (elem) => elem.getAttribute('href')),
           image: await promotion.$eval('a > div > img', (elem) =>
             elem.getAttribute('src'),
           ),
@@ -59,9 +58,10 @@ const gmarketCrawler = (() => {
 })();
 
 const gmarketCrawlerSaveAll = async () => {
+  const brand = await findByName('g마켓');
   const promotions = await gmarketCrawler.run();
 
-  await createAll(promotions, 5);
+  await createAll(promotions, brand);
 };
 
 module.exports = { gmarketCrawlerSaveAll };

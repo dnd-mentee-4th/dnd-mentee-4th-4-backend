@@ -1,12 +1,13 @@
 const puppeteer = require('puppeteer');
 const { createAll } = require('../../service/promotionService.js');
+const { findByName } = require('../../service/brandService.js');
 
 const BASE_URL = 'https://store.musinsa.com';
 
-async function getOne(page, index) {
+async function getOne(page, index, url) {
   const promotion = {};
   promotion.url =
-    BASE_URL +
+    url +
     (await page.$eval(
       `body > div.wrap > div.right_area > div.right_contents > ul > li:nth-child(${index}) > a`,
       (data) => data.getAttribute('href'),
@@ -46,7 +47,7 @@ async function getOne(page, index) {
   return JSON.stringify(promotion);
 }
 
-async function getAll(page) {
+async function getAll(page, url) {
   const promotions = [];
 
   const $promotions = await page.$$eval(
@@ -82,9 +83,11 @@ const musinsaCrawler = async () => {
 };
 
 const musinsaSaveAll = async () => {
+  const brand = await findByName('무신사');
+
   const promotions = await musinsaCrawler();
 
-  await createAll(promotions, 1);
+  await createAll(promotions, brand);
 };
 
 module.exports = { musinsaSaveAll };

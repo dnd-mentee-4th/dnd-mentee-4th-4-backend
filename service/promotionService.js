@@ -1,16 +1,21 @@
 const Promotion = require('../models/Promotion.js');
 
-const findAll = () => {
-  return Promotion.findAll();
-};
-
-const findByBrand = (brandId) => {
+const findAll = (page, size) => {
   return Promotion.findAll({
-    where: { brand_id: brandId },
+    limit: size ? +size : 0,
+    offset: page ? (page - 1) * size : 0,
   });
 };
 
-const createAll = async (promotions, brandId) => {
+const findByBrand = (brandId, page, size) => {
+  return Promotion.findAll({
+    where: { brand_id: brandId },
+    limit: size ? +size : 0,
+    offset: page ? (page - 1) * size : 0,
+  });
+};
+
+const createAll = async (promotions, brand) => {
   const savedPromotions = promotions.forEach((promotion) => {
     const promotionJson = JSON.parse(promotion);
 
@@ -19,7 +24,7 @@ const createAll = async (promotions, brandId) => {
       description: promotionJson.description,
       image: promotionJson.image,
       url: promotionJson.url,
-      brandId,
+      brandId: brand.id,
     };
 
     try {

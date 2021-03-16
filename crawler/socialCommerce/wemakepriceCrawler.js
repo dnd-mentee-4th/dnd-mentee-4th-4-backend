@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const { createAll } = require('../../service/promotionService.js');
+const { findByName } = require('../../service/brandService.js');
 
 const httpsPrefix = 'https:';
 const URL = `${httpsPrefix}//front.wemakeprice.com/promotions/main`;
@@ -31,7 +32,9 @@ const wemakepriceCrawler = (() => {
       scrappedData.push(
         JSON.stringify({
           url: appendHttps(
-            await promotion.$eval('a[href]', (card) => card.getAttribute('href')),
+            await promotion.$eval('a[href]', (card) =>
+              card.getAttribute('href'),
+            ),
           ),
           image: await promotion.$eval('img[src]', (img) =>
             img.getAttribute('src'),
@@ -70,9 +73,10 @@ const wemakepriceCrawler = (() => {
 })();
 
 const wemakepriceCrawlerSaveAll = async () => {
+  const brand = await findByName('위메프');
   const promotions = await wemakepriceCrawler.run();
 
-  await createAll(promotions, 5);
+  await createAll(promotions, brand);
 };
 
 module.exports = { wemakepriceCrawlerSaveAll };

@@ -40,6 +40,10 @@ module.exports = class Promotion extends Sequelize.Model {
           type: Sequelize.DATE,
           allowNull: true,
         },
+        brandId: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+        },
       },
       {
         sequelize,
@@ -53,5 +57,11 @@ module.exports = class Promotion extends Sequelize.Model {
         underscored: true,
       },
     );
+  }
+
+  static associate(db) {
+    db.Promotion.belongsTo(db.Brand, {
+      foreignKey: 'brand_id',
+    });
   }
 };

@@ -1,8 +1,6 @@
 const puppeteer = require('puppeteer');
 const { createAll } = require('../../service/promotionService.js');
-
-const BASE_URL =
-  'https://www.ssfshop.com/special/list?dspCtgryNo=PLAN&brandShopNo=BDMA07A01&brndShopId=8SBSS&etcCtgryNo=&ctgrySectCd=&keyword=&leftBrandNM=8SECONDS_8SBSS';
+const { findByName } = require('../../service/brandService.js');
 
 const eightSecondsCrawler = (() => {
   const getAll = async (page) => {
@@ -27,13 +25,13 @@ const eightSecondsCrawler = (() => {
     return Promise.all(promotions);
   };
 
-  const run = async () => {
+  const run = async (url) => {
     let promotions = [];
 
     try {
       const browser = await puppeteer.launch();
       const page = await browser.newPage();
-      await page.goto(BASE_URL, { waitUnitl: 'networkidle0' });
+      await page.goto(url, { waitUnitl: 'networkidle0' });
       await page.waitForSelector('#list > li');
 
       promotions = await getAll(page);
@@ -49,9 +47,11 @@ const eightSecondsCrawler = (() => {
 })();
 
 const eightSecondsSaveAll = async () => {
-  const promotions = await eightSecondsCrawler.run();
+  const brand = await findByName('에잇세컨즈');
 
-  await createAll(promotions);
+  const promotions = await eightSecondsCrawler.run(brand.promotionUrl);
+
+  await createAll(promotions, brand);
 };
 
 module.exports = { eightSecondsSaveAll };

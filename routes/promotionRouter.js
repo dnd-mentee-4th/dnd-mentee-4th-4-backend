@@ -3,16 +3,17 @@ const promotionService = require('../service/promotionService.js');
 
 const router = express.Router();
 
-router.get('/promotions', async (req, res) => {
-  const promotions = await promotionService.findAll();
+router.get('/brands/promotions', async (req, res) => {
+  const { size, page } = req.query;
+  const promotions = await promotionService.findAll(page, size);
 
   res.status(200).send(promotions);
 });
 
-router.get('/promotions/:promotionId', async (req, res) => {
-  const { promotionId } = req.params;
-
-  const promotions = await promotionService.findByBrand(promotionId);
+router.get('/brands/:brandId/promotions', async (req, res) => {
+  const { brandId } = req.params;
+  const { size, page } = req.query;
+  const promotions = await promotionService.findByBrand(brandId, page, size);
 
   res.status(200).send(promotions);
 });
