@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const { createAll } = require('../../service/promotionService.js');
+const { createAll, destroyAll } = require('../../service/promotionService.js');
 const { findByName } = require('../../service/brandService.js');
 
 const URL = 'https://www.gmarket.co.kr/';
@@ -61,6 +61,7 @@ const gmarketCrawlerSaveAll = async () => {
   const brand = await findByName('g마켓');
   const promotions = await gmarketCrawler.run();
 
+  await destroyAll(brand.dataValues.id);
   await createAll(promotions, brand);
 };
 

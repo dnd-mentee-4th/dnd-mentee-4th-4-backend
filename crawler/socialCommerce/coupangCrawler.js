@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const { createAll } = require('../../service/promotionService.js');
+const { createAll, destroyAll } = require('../../service/promotionService.js');
 const { findByName } = require('../../service/brandService.js');
 
 const URL = 'https://www.coupang.com/np/exhibition/ALL';
@@ -72,6 +72,7 @@ const coupangCrawlerSaveAll = async () => {
   const brand = await findByName('쿠팡');
   const promotions = await coupangCrawler.run();
 
+  await destroyAll(brand.dataValues.id);
   await createAll(promotions, brand);
 };
 

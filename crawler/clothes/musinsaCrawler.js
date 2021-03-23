@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const { createAll } = require('../../service/promotionService.js');
+const { createAll, destroyAll } = require('../../service/promotionService.js');
 const { findByName } = require('../../service/brandService.js');
 
 const BASE_URL = 'https://store.musinsa.com';
@@ -84,9 +84,9 @@ const musinsaCrawler = async () => {
 
 const musinsaSaveAll = async () => {
   const brand = await findByName('무신사');
-
   const promotions = await musinsaCrawler();
 
+  await destroyAll(brand.dataValues.id);
   await createAll(promotions, brand);
 };
 
