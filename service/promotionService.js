@@ -10,7 +10,7 @@ const findAll = (page, size) => {
 const findByBrand = (brandId, page, size) => {
   return Promotion.findAll({
     where: { brand_id: brandId },
-    limit: size ? +size : 0,
+    limit: size ? +size : 20,
     offset: page ? (page - 1) * size : 0,
   });
 };
@@ -37,8 +37,15 @@ const createAll = async (promotions, brand) => {
   return savedPromotions;
 };
 
+const destroyAll = async (brand) => {
+  await Promotion.destroy({
+    where: { brandId: brand },
+  });
+};
+
 module.exports = {
   findAll,
   findByBrand,
   createAll,
+  destroyAll,
 };
