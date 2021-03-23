@@ -1,5 +1,5 @@
-const { Brand } = require('../models');
 const sequelize = require('sequelize');
+const { Brand } = require('../models');
 
 const op = sequelize.Op;
 
