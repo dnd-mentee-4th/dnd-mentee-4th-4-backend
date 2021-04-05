@@ -15,6 +15,7 @@ const categoryRouter = require('./routes/categoryRouter.js');
 const brandRouter = require('./routes/brandRouter.js');
 const indexRouter = require('./routes/indexRouter.js');
 const favoriteRouter = require('./routes/favoriteRouter.js');
+const searchRouter = require('./routes/searchRouter.js');
 
 const app = express();
 
@@ -36,7 +37,7 @@ app.use(
   }),
 );
 
-app.use('/api', [promotionRouter, categoryRouter, brandRouter]);
+app.use('/api', [promotionRouter, categoryRouter, brandRouter, searchRouter]);
 app.use('/login', loginRouter);
 app.use('/users', favoriteRouter);
 app.use('/', indexRouter);

@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const { createAll } = require('../../service/promotionService.js');
+const { createAll, destroyAll } = require('../../service/promotionService.js');
 const { findByName } = require('../../service/brandService.js');
 
 const httpsPrefix = 'https:';
@@ -76,6 +76,7 @@ const wemakepriceCrawlerSaveAll = async () => {
   const brand = await findByName('위메프');
   const promotions = await wemakepriceCrawler.run();
 
+  await destroyAll(brand.dataValues.id);
   await createAll(promotions, brand);
 };
 
