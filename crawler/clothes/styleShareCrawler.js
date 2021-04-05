@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const { createAll } = require('../../service/promotionService.js');
+const { createAll, destroyAll } = require('../../service/promotionService.js');
 const { findByName } = require('../../service/brandService.js');
 
 const BASE_URL = 'https://www.styleshare.kr';
@@ -75,6 +75,7 @@ const styleShareCrawlerSaveAll = async () => {
   const brand = await findByName('스타일쉐어');
   const promotions = await styleShareCrawler.run();
 
+  await destroyAll(brand.dataValues.id);
   await createAll(promotions, brand);
 };
 

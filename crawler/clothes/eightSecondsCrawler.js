@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const { createAll } = require('../../service/promotionService.js');
+const { createAll, destroyAll } = require('../../service/promotionService.js');
 const { findByName } = require('../../service/brandService.js');
 
 const eightSecondsCrawler = (() => {
@@ -48,9 +48,9 @@ const eightSecondsCrawler = (() => {
 
 const eightSecondsSaveAll = async () => {
   const brand = await findByName('에잇세컨즈');
-
   const promotions = await eightSecondsCrawler.run(brand.promotionUrl);
 
+  await destroyAll(brand.dataValues.id);
   await createAll(promotions, brand);
 };
 
