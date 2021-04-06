@@ -113,7 +113,7 @@ const eleventhStreetCrawler = (() => {
   return { run };
 })();
 
-const eleventhStreetCrawlerSaveAll = async () => {
+const eleventhStreetSaveAll = async () => {
   const brand = await findByName('11번가');
   const promotions = await eleventhStreetCrawler.run();
 
@@ -121,4 +121,4 @@ const eleventhStreetCrawlerSaveAll = async () => {
   await createAll(promotions, brand);
 };
 
-module.exports = { eleventhStreetCrawlerSaveAll };
+module.exports = { eleventhStreetSaveAll };

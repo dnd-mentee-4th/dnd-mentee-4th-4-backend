@@ -57,7 +57,7 @@ const gmarketCrawler = (() => {
   return { run };
 })();
 
-const gmarketCrawlerSaveAll = async () => {
+const gmarketSaveAll = async () => {
   const brand = await findByName('g마켓');
   const promotions = await gmarketCrawler.run();
 
@@ -65,4 +65,4 @@ const gmarketCrawlerSaveAll = async () => {
   await createAll(promotions, brand);
 };
 
-module.exports = { gmarketCrawlerSaveAll };
+module.exports = { gmarketSaveAll };
