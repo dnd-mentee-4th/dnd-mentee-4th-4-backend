@@ -1,4 +1,4 @@
-const Promotion = require('../models/Promotion.js');
+const { Promotion } = require('../models');
 
 const findAll = (page, size) => {
   return Promotion.findAll({
