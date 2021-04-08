@@ -72,7 +72,7 @@ const wemakepriceCrawler = (() => {
   return { run };
 })();
 
-const wemakepriceCrawlerSaveAll = async () => {
+const wemakepriceSaveAll = async () => {
   const brand = await findByName('위메프');
   const promotions = await wemakepriceCrawler.run();
 
@@ -80,4 +80,4 @@ const wemakepriceCrawlerSaveAll = async () => {
   await createAll(promotions, brand);
 };
 
-module.exports = { wemakepriceCrawlerSaveAll };
+module.exports = { wemakepriceSaveAll };

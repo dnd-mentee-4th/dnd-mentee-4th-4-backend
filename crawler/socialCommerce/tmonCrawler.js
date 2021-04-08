@@ -74,7 +74,7 @@ const tmonCrawler = (() => {
   return { run };
 })();
 
-const tmonCrawlerSaveAll = async () => {
+const tmonSaveAll = async () => {
   const brand = await findByName('티몬');
   const promotions = await tmonCrawler.run();
 
@@ -82,4 +82,4 @@ const tmonCrawlerSaveAll = async () => {
   await createAll(promotions, brand);
 };
 
-module.exports = { tmonCrawlerSaveAll };
+module.exports = { tmonSaveAll };

@@ -71,7 +71,7 @@ const styleShareCrawler = (() => {
   return { run };
 })();
 
-const styleShareCrawlerSaveAll = async () => {
+const styleShareSaveAll = async () => {
   const brand = await findByName('스타일쉐어');
   const promotions = await styleShareCrawler.run();
 
@@ -79,4 +79,4 @@ const styleShareCrawlerSaveAll = async () => {
   await createAll(promotions, brand);
 };
 
-module.exports = { styleShareCrawlerSaveAll };
+module.exports = { styleShareSaveAll };

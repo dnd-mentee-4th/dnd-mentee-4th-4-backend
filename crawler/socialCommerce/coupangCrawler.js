@@ -68,7 +68,7 @@ const coupangCrawler = (() => {
   return { run };
 })();
 
-const coupangCrawlerSaveAll = async () => {
+const coupangSaveAll = async () => {
   const brand = await findByName('쿠팡');
   const promotions = await coupangCrawler.run();
 
@@ -76,4 +76,4 @@ const coupangCrawlerSaveAll = async () => {
   await createAll(promotions, brand);
 };
 
-module.exports = { coupangCrawlerSaveAll };
+module.exports = { coupangSaveAll };

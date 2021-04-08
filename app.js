@@ -16,6 +16,7 @@ const brandRouter = require('./routes/brandRouter.js');
 const indexRouter = require('./routes/indexRouter.js');
 const favoriteRouter = require('./routes/favoriteRouter.js');
 const searchRouter = require('./routes/searchRouter.js');
+const cron = require('./modules/cron.js');
 
 const app = express();
 
@@ -36,6 +37,8 @@ app.use(
     },
   }),
 );
+
+cron.batch();
 
 app.use('/api', [promotionRouter, categoryRouter, brandRouter, searchRouter]);
 app.use('/login', loginRouter);
