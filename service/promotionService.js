@@ -9,7 +9,7 @@ const findAll = (page, size) => {
 
 const findByBrand = (brandId, page, size) => {
   return Promotion.findAll({
-    where: { brand_id: brandId },
+    where: { brandId },
     limit: size ? +size : 20,
     offset: page ? (page - 1) * size : 0,
   });
