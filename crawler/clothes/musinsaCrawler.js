@@ -4,10 +4,10 @@ const { findByName } = require('../../service/brandService.js');
 
 const BASE_URL = 'https://store.musinsa.com';
 
-async function getOne(page, index, url) {
+async function getOne(page, index) {
   const promotion = {};
   promotion.url =
-    url +
+    BASE_URL +
     (await page.$eval(
       `body > div.wrap > div.right_area > div.right_contents > ul > li:nth-child(${index}) > a`,
       (data) => data.getAttribute('href'),
@@ -47,7 +47,7 @@ async function getOne(page, index, url) {
   return JSON.stringify(promotion);
 }
 
-async function getAll(page, url) {
+async function getAll(page) {
   const promotions = [];
 
   const $promotions = await page.$$eval(
