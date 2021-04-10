@@ -10,7 +10,8 @@ const eightSecondsCrawler = (() => {
       return promotionList.map((dom) => {
         const promotion = {};
 
-        promotion.url = dom.querySelector('a').getAttribute('href');
+        promotion.url = 'https://www.ssfshop.com';
+        promotion.url += dom.querySelector('a').getAttribute('href');
 
         promotion.image = dom.querySelector('a >img').getAttribute('src');
 
