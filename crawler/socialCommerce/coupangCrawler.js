@@ -1,9 +1,11 @@
+const UserAgent = require('user-agents');
+
 const puppeteer = require('puppeteer');
 const { createAll, destroyAll } = require('../../service/promotionService.js');
+
 const { findByName } = require('../../service/brandService.js');
 
 const URL = 'https://www.coupang.com/np/exhibition/ALL';
-
 const httpsPrefix = 'https:';
 const coupangSourceUrl = `${httpsPrefix}//www.coupang.com`;
 
@@ -51,7 +53,13 @@ const coupangCrawler = (() => {
     let promotions;
 
     try {
-      const browser = await puppeteer.launch();
+      const userAgent = new UserAgent({
+        deviceCategory: 'desktop',
+        platform: 'Linux x86_64',
+      });
+      const browser = await puppeteer.launch({
+        args: [`--user-agent=${userAgent.toString()}`],
+      });
       const page = await browser.newPage();
       await page.goto(URL);
 
