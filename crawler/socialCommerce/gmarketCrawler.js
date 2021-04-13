@@ -56,7 +56,7 @@ const gmarketCrawler = (() => {
 })();
 
 const gmarketSaveAll = async () => {
-  const brand = await findByName('g마켓');
+  const brand = await findByName('G마켓');
   const promotions = await gmarketCrawler.run();
 
   await destroyAll(brand.dataValues.id);
